@@ -154,21 +154,21 @@ OBJS= \
     obj/crypto/sha1.o \
     obj/crypto/sha256.o \
     obj/crypto/sha512.o \
-    obj/quark/aes_helper.c \
-	obj/quark/blake.c \
-	obj/quark/bmw.c \
-	obj/quark/groestl.c \
-	obj/quark/jh.c \
-	obj/quark/keccak.c \
-	obj/quark/luffa.c \
-	obj/quark/md_helper.c \
-	obj/quark/sha2.c \
-	obj/quark/shabal.c \
-	obj/quark/shavite.c \
-	obj/quark/simd.c \
-	obj/quark/skein.c \
-	obj/quark/tiger.c \
-	obj/quark/utest.c
+    obj/quark/aes_helper.o \
+	obj/quark/blake.o \
+	obj/quark/bmw.o \
+	obj/quark/groestl.o \
+	obj/quark/jh.o \
+	obj/quark/keccak.o \
+	obj/quark/luffa.o \
+	obj/quark/md_helper.o \
+	obj/quark/sha2.o \
+	obj/quark/shabal.o \
+	obj/quark/shavite.o \
+	obj/quark/simd.o \
+	obj/quark/skein.o \
+	obj/quark/tiger.o \
+	obj/quark/utest.o
 
 ifeq (${USE_WALLET}, 1)
     DEFS += -DENABLE_WALLET
