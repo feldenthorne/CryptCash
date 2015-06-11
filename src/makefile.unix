@@ -104,13 +104,6 @@ xCXXFLAGS=-O2 $(EXT_OPTIONS) -pthread -Wall -Wextra -Wno-ignored-qualifiers -Wfo
 xLDFLAGS=$(LDHARDENING) $(LDFLAGS)
 
 OBJS= \
-	obj/aes_helper.o \
-    obj/blake.o \
-    obj/bmw.o \
-    obj/groestl.o \
-    obj/jh.o \
-    obj/keccak.o \
-    obj/skein.c \
     obj/alert.o \
     obj/version.o \
     obj/checkpoints.o \
