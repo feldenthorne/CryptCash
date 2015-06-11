@@ -34,6 +34,10 @@
 #include <string.h>
 #include <limits.h>
 
+#ifdef __cplusplus
+extern "C"{
+#endif
+
 #include "sph_bmw.h"
 
 #if SPH_SMALL_FOOTPRINT && !defined SPH_SMALL_FOOTPRINT_BMW
@@ -702,7 +706,7 @@ bmw32_close(sph_bmw_small_context *sc, unsigned ub, unsigned n,
 	for (u = 0; u < 16; u ++)
 		sph_enc32le_aligned(buf + 4 * u, h2[u]);
 	compress_small(buf, final_s, h1);
-	out = (unsigned char*)dst;
+	out = dst;
 	for (u = 0, v = 16 - out_size_w32; u < out_size_w32; u ++, v ++)
 		sph_enc32le(out + 4 * u, h1[v]);
 }
@@ -829,7 +833,7 @@ bmw64_close(sph_bmw_big_context *sc, unsigned ub, unsigned n,
 	for (u = 0; u < 16; u ++)
 		sph_enc64le_aligned(buf + 8 * u, h2[u]);
 	compress_big(buf, final_b, h1);
-	out = (unsigned char*)dst;
+	out = dst;
 	for (u = 0, v = 16 - out_size_w64; u < out_size_w64; u ++, v ++)
 		sph_enc64le(out + 8 * u, h1[v]);
 }
@@ -840,58 +844,58 @@ bmw64_close(sph_bmw_big_context *sc, unsigned ub, unsigned n,
 void
 sph_bmw224_init(void *cc)
 {
-	bmw32_init((sph_bmw_small_context*)cc, IV224);
+	bmw32_init(cc, IV224);
 }
 
 /* see sph_bmw.h */
 void
 sph_bmw224(void *cc, const void *data, size_t len)
 {
-	bmw32((sph_bmw_small_context*)cc, data, len);
+	bmw32(cc, data, len);
 }
 
 /* see sph_bmw.h */
 void
 sph_bmw224_close(void *cc, void *dst)
 {
-	sph_bmw224_addbits_and_close((sph_bmw_small_context*)cc, 0, 0, dst);
+	sph_bmw224_addbits_and_close(cc, 0, 0, dst);
 }
 
 /* see sph_bmw.h */
 void
 sph_bmw224_addbits_and_close(void *cc, unsigned ub, unsigned n, void *dst)
 {
-	bmw32_close((sph_bmw_small_context*)cc, ub, n, dst, 7);
-	sph_bmw224_init((sph_bmw_small_context*)cc);
+	bmw32_close(cc, ub, n, dst, 7);
+	sph_bmw224_init(cc);
 }
 
 /* see sph_bmw.h */
 void
 sph_bmw256_init(void *cc)
 {
-	bmw32_init((sph_bmw_small_context*)cc, IV256);
+	bmw32_init(cc, IV256);
 }
 
 /* see sph_bmw.h */
 void
 sph_bmw256(void *cc, const void *data, size_t len)
 {
-	bmw32((sph_bmw_small_context*)cc, data, len);
+	bmw32(cc, data, len);
 }
 
 /* see sph_bmw.h */
 void
 sph_bmw256_close(void *cc, void *dst)
 {
-	sph_bmw256_addbits_and_close((sph_bmw_small_context*)cc, 0, 0, dst);
+	sph_bmw256_addbits_and_close(cc, 0, 0, dst);
 }
 
 /* see sph_bmw.h */
 void
 sph_bmw256_addbits_and_close(void *cc, unsigned ub, unsigned n, void *dst)
 {
-	bmw32_close((sph_bmw_small_context*)cc, ub, n, dst, 8);
-	sph_bmw256_init((sph_bmw_small_context*)cc);
+	bmw32_close(cc, ub, n, dst, 8);
+	sph_bmw256_init(cc);
 }
 
 #if SPH_64
@@ -900,58 +904,62 @@ sph_bmw256_addbits_and_close(void *cc, unsigned ub, unsigned n, void *dst)
 void
 sph_bmw384_init(void *cc)
 {
-	bmw64_init((sph_bmw_big_context*)cc, IV384);
+	bmw64_init(cc, IV384);
 }
 
 /* see sph_bmw.h */
 void
 sph_bmw384(void *cc, const void *data, size_t len)
 {
-	bmw64((sph_bmw_big_context*)cc, data, len);
+	bmw64(cc, data, len);
 }
 
 /* see sph_bmw.h */
 void
 sph_bmw384_close(void *cc, void *dst)
 {
-	sph_bmw384_addbits_and_close((sph_bmw_big_context*)cc, 0, 0, dst);
+	sph_bmw384_addbits_and_close(cc, 0, 0, dst);
 }
 
 /* see sph_bmw.h */
 void
 sph_bmw384_addbits_and_close(void *cc, unsigned ub, unsigned n, void *dst)
 {
-	bmw64_close((sph_bmw_big_context*)cc, ub, n, dst, 6);
-	sph_bmw384_init((sph_bmw_big_context*)cc);
+	bmw64_close(cc, ub, n, dst, 6);
+	sph_bmw384_init(cc);
 }
 
 /* see sph_bmw.h */
 void
 sph_bmw512_init(void *cc)
 {
-	bmw64_init((sph_bmw_big_context*)cc, IV512);
+	bmw64_init(cc, IV512);
 }
 
 /* see sph_bmw.h */
 void
 sph_bmw512(void *cc, const void *data, size_t len)
 {
-	bmw64((sph_bmw_big_context*)cc, data, len);
+	bmw64(cc, data, len);
 }
 
 /* see sph_bmw.h */
 void
 sph_bmw512_close(void *cc, void *dst)
 {
-	sph_bmw512_addbits_and_close((sph_bmw_big_context*)cc, 0, 0, dst);
+	sph_bmw512_addbits_and_close(cc, 0, 0, dst);
 }
 
 /* see sph_bmw.h */
 void
 sph_bmw512_addbits_and_close(void *cc, unsigned ub, unsigned n, void *dst)
 {
-	bmw64_close((sph_bmw_big_context*)cc, ub, n, dst, 8);
-	sph_bmw512_init((sph_bmw_big_context*)cc);
+	bmw64_close(cc, ub, n, dst, 8);
+	sph_bmw512_init(cc);
 }
 
+#endif
+
+#ifdef __cplusplus
+}
 #endif
