@@ -33,6 +33,7 @@
 //      readmissing   -- read N missing keys in random order
 //      readhot       -- read N times in random order from 1% section of DB
 //      seekrandom    -- N random seeks
+//      open          -- cost of opening a DB
 //      crc32c        -- repeated crc32c of 4K of data
 //      acquireload   -- load N*1000 times
 //   Meta operations:
@@ -431,7 +432,7 @@ class Benchmark {
         benchmarks = sep + 1;
       }
 
-      // Reset parameters that may be overriddden bwlow
+      // Reset parameters that may be overridden below
       num_ = FLAGS_num;
       reads_ = (FLAGS_reads < 0 ? FLAGS_num : FLAGS_reads);
       value_size_ = FLAGS_value_size;
@@ -442,7 +443,11 @@ class Benchmark {
       bool fresh_db = false;
       int num_threads = FLAGS_threads;
 
-      if (name == Slice("fillseq")) {
+      if (name == Slice("open")) {
+        method = &Benchmark::OpenBench;
+        num_ /= 10000;
+        if (num_ < 1) num_ = 1;
+      } else if (name == Slice("fillseq")) {
         fresh_db = true;
         method = &Benchmark::WriteSeq;
       } else if (name == Slice("fillbatch")) {
@@ -702,6 +707,14 @@ class Benchmark {
     }
   }
 
+  void OpenBench(ThreadState* thread) {
+    for (int i = 0; i < num_; i++) {
+      delete db_;
+      Open();
+      thread->stats.FinishedSingleOp();
+    }
+  }
+
   void WriteSeq(ThreadState* thread) {
     DoWrite(thread, true);
   }
@@ -811,7 +824,6 @@ class Benchmark {
 
   void SeekRandom(ThreadState* thread) {
     ReadOptions options;
-    std::string value;
     int found = 0;
     for (int i = 0; i < reads_; i++) {
       Iterator* iter = db_->NewIterator(options);
