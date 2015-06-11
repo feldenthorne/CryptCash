@@ -10,7 +10,6 @@
 #include "txdb.h"
 #include "main.h"
 #include "uint256.h"
-#include "chainparams.cpp"
 
 
 static const int nCheckpointSpan = 10;
@@ -28,7 +27,7 @@ namespace Checkpoints
     //
     static MapCheckpoints mapCheckpoints =
         boost::assign::map_list_of
-        (    0,	Params().HashGenesisBlock() )
+        (    0,	uint256("0x001611f5d3623e8ff135714833fa0d135c45f9981d8854ec0f9f44e29426e8d1") )
         
     ;
 
