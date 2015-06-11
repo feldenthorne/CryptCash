@@ -104,6 +104,13 @@ xCXXFLAGS=-O2 $(EXT_OPTIONS) -pthread -Wall -Wextra -Wno-ignored-qualifiers -Wfo
 xLDFLAGS=$(LDHARDENING) $(LDFLAGS)
 
 OBJS= \
+	obj/aes_helper.o \
+    obj/blake.o \
+    obj/bmw.o \
+    obj/groestl.o \
+    obj/jh.o \
+    obj/keccak.o \
+    obj/skein.c \
     obj/alert.o \
     obj/version.o \
     obj/checkpoints.o \
@@ -153,22 +160,7 @@ OBJS= \
     obj/crypto/ripemd160.o \
     obj/crypto/sha1.o \
     obj/crypto/sha256.o \
-    obj/crypto/sha512.o \
-    obj/quark/aes_helper.c \
-	obj/quark/blake.c \
-	obj/quark/bmw.c \
-	obj/quark/groestl.c \
-	obj/quark/jh.c \
-	obj/quark/keccak.c \
-	obj/quark/luffa.c \
-	obj/quark/md_helper.c \
-	obj/quark/sha2.c \
-	obj/quark/shabal.c \
-	obj/quark/shavite.c \
-	obj/quark/simd.c \
-	obj/quark/skein.c \
-	obj/quark/tiger.c \
-	obj/quark/utest.c
+    obj/crypto/sha512.o
 
 ifeq (${USE_WALLET}, 1)
     DEFS += -DENABLE_WALLET

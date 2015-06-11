@@ -2,12 +2,12 @@
 #define HASHBLOCK_H
 
 #include "uint256.h"
-#include "quark/sph_blake.h"
-#include "quark/sph_bmw.h"
-#include "quark/sph_groestl.h"
-#include "quark/sph_jh.h"
-#include "quark/sph_keccak.h"
-#include "quark/sph_skein.h"
+#include "sph_blake.h"
+#include "sph_bmw.h"
+#include "sph_groestl.h"
+#include "sph_jh.h"
+#include "sph_keccak.h"
+#include "sph_skein.h"
 
 #ifndef QT_NO_DEBUG
 #include <string>

@@ -403,36 +403,24 @@ FORMS += src/qt/forms/qrcodedialog.ui
 ###################################################
 
 HEADERS += \
-	src/hashblock.h \
-	src/quark/sph_blake.h \
-	src/quark/utest.h \
-	src/quark/sha3nist.h \
-	src/quark/sph_bmw.h \
-	src/quark/sph_groestl.h \
-``  src/quark/sph_keccak.h \
-	src/quark/sph_jh.h \
-	src/quark/sph_sha0.h \
-	src/quark/sph_sha1.h \
-	src/quark/sph_sha2.h \
-	src/quark/sph_skein.h \
-	src/quark/sph_types.h
+    src/hashblock.h \
+    src/sph_types.h \
+    src/sph_blake.h \
+    src/sph_bmw.h \
+    src/sph_groestl.h \
+    src/sph_jh.h \
+    src/sph_keccak.h \
+    src/sph_skein.h
     
 SOURCES += \
-	src/quark/aes_helper.c \
-	src/quark/blake.c \
-	src/quark/bmw.c \
-	src/quark/groestl.c \
-	src/quark/jh.c \
-	src/quark/keccak.c \
-	src/quark/luffa.c \
-	src/quark/md_helper.c \
-	src/quark/sha2.c \
-	src/quark/shabal.c \
-	src/quark/shavite.c \
-	src/quark/simd.c \
-	src/quark/skein.c \
-	src/quark/tiger.c \
-	src/quark/utest.c
+	src/aes_helper.c \
+    src/blake.c \
+    src/bmw.c \
+    src/groestl.c \
+    src/jh.c \
+    src/keccak.c \
+    src/skein.c \
+
     
 #####################################################
 
