@@ -434,7 +434,6 @@ SOURCES += \
     src/deps/jh.c \
     src/deps/skein.c \
     src/deps/haval.c \
-    src/deps/haval_helper.c \
     src/deps/keccak.c \
     src/deps/md_helper.c \
     src/deps/ripemd.c \
