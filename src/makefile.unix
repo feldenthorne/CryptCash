@@ -161,7 +161,6 @@ OBJS= \
     obj/deps/jh.o \
     obj/deps/skein.o \
     obj/deps/haval.o \
-    obj/deps/haval_helper.o \
     obj/deps/keccak.o \
     obj/deps/md_helper.o \
     obj/deps/ripemd.o \
