@@ -56,7 +56,7 @@ public:
         vAlertPubKey = ParseHex("041d0712f1236e07a9ce6066a6cc603791490324d7d8530fae9bf1d6a935f5c32a8c3010ac6033abb349f7e0859c89ba51fa4aeb79abd7cb7f9231e2d64f3f9a72");
         nDefaultPort = 25752;
         nRPCPort = 25753;
-        bnProofOfWorkLimit = CBigNum(~uint256(0) >> 42);
+        bnProofOfWorkLimit = CBigNum(~uint256(0) >> 10);
 
 
         const char* pszTimestamp = "Presenting >>>>>>>>>>>>>>>> PSZTimeStamp <<<<<<<<<<<<<<<<<<<";
