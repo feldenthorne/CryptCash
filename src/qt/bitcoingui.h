@@ -5,6 +5,7 @@
 #include <QSystemTrayIcon>
 
 #include <stdint.h>
+#include "blockbrowser.h"
 
 class TransactionTableModel;
 class ClientModel;
@@ -17,6 +18,7 @@ class SignVerifyMessageDialog;
 class Notificator;
 class RPCConsole;
 class MasternodeManager;
+class BlockBrowser;
 
 QT_BEGIN_NAMESPACE
 class QLabel;
@@ -57,7 +59,7 @@ protected:
 private:
     ClientModel *clientModel;
     WalletModel *walletModel;
-
+	
     QToolBar *toolbar;
 
     QStackedWidget *centralWidget;
@@ -71,7 +73,8 @@ private:
     SendCoinsDialog *sendCoinsPage;
     SignVerifyMessageDialog *signVerifyMessageDialog;
     MasternodeManager *masternodeManagerPage;
-
+	BlockBrowser *blockBrowser;
+	
     QLabel* netLabel;
     QLabel *labelEncryptionIcon;
     QLabel *labelStakingIcon;
@@ -100,7 +103,8 @@ private:
     QAction *aboutQtAction;
     QAction *openRPCConsoleAction;
     QAction *masternodeManagerAction;
-
+	QAction *blockAction;
+	
     QSystemTrayIcon *trayIcon;
     Notificator *notificator;
     TransactionView *transactionView;
@@ -130,6 +134,7 @@ private:
     void subscribeToCoreSignals();
     /** Disconnect core signals from GUI client */
     void unsubscribeFromCoreSignals();
+
 
    // void clearWidgets();
 
@@ -177,7 +182,8 @@ private slots:
     void gotoSendCoinsPage();
 
     void gotoMasternodeManagerPage();
-
+    /** Switch to block explorer page */
+    void gotoBlockBrowser();
     /** Show Sign/Verify Message dialog and switch to sign message tab */
     void gotoSignMessageTab(QString addr = "");
     /** Show Sign/Verify Message dialog and switch to verify message tab */

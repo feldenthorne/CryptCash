@@ -56,7 +56,7 @@ public:
         vAlertPubKey = ParseHex("041d0712f1236e07a9ce6066a6cc603791490324d7d8530fae9bf1d6a935f5c32a8c3010ac6033abb349f7e0859c89ba51fa4aeb79abd7cb7f9231e2d64f3f9a72");
         nDefaultPort = 25752;
         nRPCPort = 25753;
-        bnProofOfWorkLimit = CBigNum(~uint256(0) >> 28);
+        bnProofOfWorkLimit = CBigNum(~uint256(0) >> 42);
 
 
         const char* pszTimestamp = "Presenting >>>>>>>>>>>>>>>> PSZTimeStamp <<<<<<<<<<<<<<<<<<<";
@@ -90,14 +90,14 @@ public:
 
         convertSeed6(vFixedSeeds, pnSeed6_main, ARRAYLEN(pnSeed6_main));
 
-        nTargetSpacing = 60; // seconds
-
-        nLastPOWBlock  = 10000;
+        nTargetSpacing = 40; // seconds
+        
+        nLastPOWBlock  = 1000000;
 
         nFirstPoSBlock = 1000;
-        nCoinbaseMaturity = 175;
+        nCoinbaseMaturity = 25;
         nLaunchTime = txNew.nTime;
-        nStakeMinAge = 2 * 60 * 60;
+        nStakeMinAge = 12 * 60 * 60;
         nModifierInterval = 1 * 60;
 
         nMasternodeFixReward = 1000 * COIN;

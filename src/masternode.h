@@ -7,7 +7,6 @@
 #define MASTERNODE_H
 
 #include "uint256.h"
-#include "uint256.h"
 #include "sync.h"
 #include "net.h"
 #include "key.h"
@@ -34,7 +33,7 @@ class uint256;
 #define MASTERNODE_SYNC_IN_PROCESS             8
 #define MASTERNODE_REMOTELY_ENABLED            9
 
-#define MASTERNODE_MIN_CONFIRMATIONS           452
+#define MASTERNODE_MIN_CONFIRMATIONS           50
 #define MASTERNODE_MIN_DSEEP_SECONDS           (30*60)
 #define MASTERNODE_MIN_DSEE_SECONDS            (5*60)
 #define MASTERNODE_PING_SECONDS                (1*60)

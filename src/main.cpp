@@ -39,7 +39,7 @@ CTxMemPool mempool;
 map<uint256, CBlockIndex*> mapBlockIndex;
 set<pair<COutPoint, unsigned int> > setStakeSeen;
 
-CBigNum bnProofOfStakeLimit(~uint256(0) >> 20);
+CBigNum bnProofOfStakeLimit(~uint256(0) >> 42);
 
 unsigned int nStakeMinAge = Params().StakeMinAge();
 unsigned int nModifierInterval = Params().ModifierInterval(); // time to elapse before new modifier is computed
@@ -1124,11 +1124,31 @@ static CBigNum GetProofOfStakeLimit(int nHeight)
 // miner's coin base reward
 int64_t GetProofOfWorkReward(int64_t nHeight, int64_t nFees)
 {
-    int64_t nSubsidy = 8 * COIN;
+    int64_t nSubsidy = 0 * COIN;
     
-    if (nHeight == 1)
-    {
-		nSubsidy = 20001000 * COIN;
+	if(nHeight < QuarkSwitch)
+	{
+		nSubsidy = 8 * COIN; // Quark Algorithm
+	}
+	else if(nHeight < NIST5Switch)
+	{
+		nSubsidy = 7.8 * COIN; // M7 Algorithm
+	}
+	else if(nHeight < TremontSwitch)
+	{
+		nSubsidy = 6.6 * COIN; // Momentum Algorithm
+	}
+	else if(nHeight < WhirlpoolSwitch)
+	{
+		nSubsidy = 5.4 * COIN; // Whirlpool Hash
+	}
+	else if(nHeight < X17Switch)
+	{
+		nSubsidy = 4.52 * COIN; // Prime Algorithm
+	}
+	else if (nHeight < TeslaSwitch)
+	{
+		nSubsidy = 2 * COIN; // Tesla Algorithm
 	}
 		
     LogPrint("creation", "GetProofOfWorkReward() : create=%s nSubsidy=%d\n", FormatMoney(nSubsidy), nSubsidy);

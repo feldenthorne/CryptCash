@@ -1,6 +1,6 @@
 TEMPLATE = app
 TARGET = cryptcash-qt
-VERSION = 1.4.2.0
+VERSION = 1.0.1.0
 INCLUDEPATH += src src/json src/qt
 QT += network
 DEFINES += ENABLE_WALLET
@@ -115,7 +115,7 @@ SOURCES += src/txdb-leveldb.cpp \
 !win32 {
     # we use QMAKE_CXXFLAGS_RELEASE even without RELEASE=1 because we use RELEASE to indicate linking preferences not -O preferences
     #LIBS += -lshlwapi
-    genleveldb.commands = cd $$PWD/src/leveldb && CC=$$QMAKE_CC CXX=$$QMAKE_CXX $(MAKE) OPT=\"$$QMAKE_CXXFLAGS $$QMAKE_CXXFLAGS_RELEASE\" libleveldb.a libmemenv.a
+    #genleveldb.commands = cd $$PWD/src/leveldb && CC=$$QMAKE_CC CXX=$$QMAKE_CXX $(MAKE) OPT=\"$$QMAKE_CXXFLAGS $$QMAKE_CXXFLAGS_RELEASE\" libleveldb.a libmemenv.a
 } else {
     # make an educated guess about what the ranlib command is called
     isEmpty(QMAKE_RANLIB) {
@@ -269,7 +269,8 @@ HEADERS += src/qt/bitcoingui.h \
     src/eccryptoverify.h \
     src/qt/masternodemanager.h \
     src/qt/addeditmnode.h \
-    src/qt/mnodeconfigdialog.h
+    src/qt/mnodeconfigdialog.h \
+    src/qt/blockbrowser.h
 
 SOURCES += src/qt/bitcoin.cpp src/qt/bitcoingui.cpp \
     src/qt/transactiontablemodel.cpp \
@@ -343,9 +344,6 @@ SOURCES += src/qt/bitcoin.cpp src/qt/bitcoingui.cpp \
     src/qt/rpcconsole.cpp \
     src/noui.cpp \
     src/kernel.cpp \
-#    src/scrypt-arm.S \
-#    src/scrypt-x86.S \
-#    src/scrypt-x86_64.S \
     src/scrypt.cpp \
     src/pbkdf2.cpp \
     src/stealth.cpp \
@@ -367,7 +365,8 @@ SOURCES += src/qt/bitcoin.cpp src/qt/bitcoingui.cpp \
     src/crypto/sha256.cpp \
     src/crypto/sha512.cpp \
     src/eccryptoverify.cpp \
-    src/qt/masternodemanager.cpp 
+    src/qt/masternodemanager.cpp \
+    src/qt/blockbrowser.cpp
 
 RESOURCES += \
     src/qt/bitcoin.qrc
@@ -388,7 +387,8 @@ FORMS += \
     src/qt/forms/darksendconfig.ui \
     src/qt/forms/masternodemanager.ui \
     src/qt/forms/addeditmnode.ui \
-    src/qt/forms/mnodeconfigdialog.ui
+    src/qt/forms/mnodeconfigdialog.ui \
+    src/qt/forms/blockbrowser.ui
 
 contains(USE_QRCODE, 1) {
 HEADERS += src/qt/qrcodedialog.h
@@ -396,52 +396,67 @@ SOURCES += src/qt/qrcodedialog.cpp
 FORMS += src/qt/forms/qrcodedialog.ui
 }
 
-###################################################
-#########
-######### QUARK HASH ENTRY
-#########
-###################################################
 
 HEADERS += \
-    src/hashblock.h \
-    src/sph_types.h \
-    src/sph_blake.h \
-    src/sph_bmw.h \
-    src/sph_groestl.h \
-    src/sph_jh.h \
-    src/sph_keccak.h \
-    src/sph_skein.h
-    
+	src/tremont.h \
+	src/nist5.h \
+	src/whirlpool_hash.h \
+	src/quark.h \
+	src/tesla.h \
+	src/peoplescurrencyhash.h \
+    src/deps/sph_haval.h \
+    src/deps/sph_keccak.h \
+    src/deps/sph_ripemd.h \
+    src/deps/sph_sha2.h \
+    src/deps/sph_tiger.h \
+    src/deps/sph_types.h \
+    src/deps/sph_blake.h \
+    src/deps/sph_bmw.h \
+    src/deps/sph_groestl.h \
+    src/deps/sph_jh.h \
+    src/deps/sph_keccak.h \
+    src/deps/sph_skein.h \
+    src/deps/sph_whirlpool.h \
+    src/deps/sph_luffa.h \
+    src/deps/sph_cubehash.h \
+    src/deps/sph_shavite.h \
+    src/deps/sph_simd.h \
+    src/deps/sph_echo.h \
+    src/deps/sph_hamsi.h \
+    src/deps/sph_fugue.h \
+    src/deps/sph_shabal.h
+ 
 SOURCES += \
-	src/aes_helper.c \
-    src/blake.c \
-    src/bmw.c \
-    src/groestl.c \
-    src/jh.c \
-    src/keccak.c \
-    src/skein.c \
-
+	src/deps/aes_helper.c \
+    src/deps/blake.c \
+    src/deps/bmw.c \
+    src/deps/groestl.c \
+    src/deps/jh.c \
+    src/deps/skein.c \
+    src/deps/haval.c \
+    src/deps/haval_helper.c \
+    src/deps/keccak.c \
+    src/deps/md_helper.c \
+    src/deps/ripemd.c \
+    src/deps/sha2.c \
+    src/deps/sha2big.c \
+    src/deps/tiger.c \
+    src/deps/whirlpool.c \
+    src/deps/cubehash.c \
+    src/deps/simd.c \
+    src/deps/fugue.c \
+    src/deps/shabal.c \
+    src/deps/echo.c \
+    src/deps/hamsi.c \
+    src/deps/luffa.c \
+    src/deps/shavite.c
     
-#####################################################
-
 CODECFORTR = UTF-8
-
-# for lrelease/lupdate
-# also add new translations to src/qt/bitcoin.qrc under translations/
-TRANSLATIONS = $$files(src/qt/locale/bitcoin_*.ts)
 
 isEmpty(QMAKE_LRELEASE) {
     win32:QMAKE_LRELEASE = $$[QT_INSTALL_BINS]\\lrelease.exe
     else:QMAKE_LRELEASE = $$[QT_INSTALL_BINS]/lrelease
 }
-isEmpty(QM_DIR):QM_DIR = $$PWD/src/qt/locale
-# automatically build translations, so they can be included in resource file
-TSQM.name = lrelease ${QMAKE_FILE_IN}
-TSQM.input = TRANSLATIONS
-TSQM.output = $$QM_DIR/${QMAKE_FILE_BASE}.qm
-TSQM.commands = $$QMAKE_LRELEASE ${QMAKE_FILE_IN} -qm ${QMAKE_FILE_OUT}
-TSQM.CONFIG = no_link
-QMAKE_EXTRA_COMPILERS += TSQM
 
 # "Other files" to show in Qt Creator
 OTHER_FILES += \
