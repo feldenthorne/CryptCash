@@ -15,11 +15,11 @@
 
 /* The Crazy Ones:
  * 
- * 1) Quark 					( 1 - 10000 )
- * 2) Tremont						( 10000 - 50000)
- * 3) NIST5 					( 50000 - 100000 )
- * 4) Whirlpool					( 100000 - 250000 )
- * 5) X17						( 250000 - 500000 )
+ * 1) Quark 				( 1 - 10000 )
+ * 2) Tremont				( 10000 - 50000)
+ * 3) NIST5 	 			( 50000 - 100000 )
+ * 4) Whirlpool				( 100000 - 250000 )
+ * 5) X17				( 250000 - 500000 )
  * 
  * Final Destination:
  * 
@@ -108,12 +108,12 @@ inline bool MoneyRange(int64_t nValue) { return (nValue >= 0 && nValue <= MAX_MO
 static const unsigned int LOCKTIME_THRESHOLD = 500000000; // Tue Nov  5 00:53:20 1985 UTC
 /** These are Forking Variables that are responsible for the Algorithms to switch */
  
-static const int64_t QuarkSwitch = 10000;
-static const int64_t NIST5Switch = 50000;
-static const int64_t TremontSwitch = 100000;
-static const int64_t WhirlpoolSwitch = 250000;
-static const int64_t X17Switch = 500000;
-static const int64_t TeslaSwitch = 1000000;
+static const int64_t QuarkSwitch = 1435708800;
+static const int64_t NIST5Switch = 1441065600;
+static const int64_t TremontSwitch = 1443657600;
+static const int64_t WhirlpoolSwitch = 1448928000;
+static const int64_t X17Switch = 1451606400;
+static const int64_t TeslaSwitch = 1454284800;
  
 inline int64_t FutureDrift(int64_t nTime) { return nTime + 120; }
 
@@ -655,7 +655,6 @@ public:
     unsigned int nTime;
     unsigned int nBits;
     unsigned int nNonce;
-    int nHeight;
         
     // network and disk
     std::vector<CTransaction> vtx;
@@ -706,7 +705,6 @@ public:
         nTime = 0;
         nBits = 0;
         nNonce = 0;
-        nHeight = 0;
         vtx.clear();
         vchBlockSig.clear();
         vMerkleTree.clear();
@@ -729,11 +727,11 @@ public:
 
     uint256 GetPoWHash() const
     {
-		if (nHeight < QuarkSwitch)	{return QuarkHash(BEGIN(nVersion), END(nNonce));}
-		else if(nHeight < NIST5Switch) {return NIST5Hash(BEGIN(nVersion), END(nNonce));}
-		else if(nHeight < TremontSwitch) {return TremontHash(BEGIN(nVersion), END(nNonce));}
-		else if(nHeight < WhirlpoolSwitch) {return Whirlpool(BEGIN(nVersion), END(nNonce));}
-		else if(nHeight < X17Switch) {return PeoplesCurrencyHash(BEGIN(nVersion), END(nNonce));}
+		if (nTime < QuarkSwitch)	{return QuarkHash(BEGIN(nVersion), END(nNonce));}
+		else if(nTime < NIST5Switch) {return NIST5Hash(BEGIN(nVersion), END(nNonce));}
+		else if(nTime < TremontSwitch) {return TremontHash(BEGIN(nVersion), END(nNonce));}
+		else if(nTime < WhirlpoolSwitch) {return Whirlpool(BEGIN(nVersion), END(nNonce));}
+		else if(nTime < X17Switch) {return PeoplesCurrencyHash(BEGIN(nVersion), END(nNonce));}
 		else {return TeslaHash(BEGIN(nVersion), END (nNonce));}
     }
 
