@@ -108,7 +108,7 @@ inline bool MoneyRange(int64_t nValue) { return (nValue >= 0 && nValue <= MAX_MO
 static const unsigned int LOCKTIME_THRESHOLD = 500000000; // Tue Nov  5 00:53:20 1985 UTC
 /** These are Forking Variables that are responsible for the Algorithms to switch */
  
-static const int64_t QuarkSwitch = 1435708800;
+static const int64_t QuarkSwitch = 1434758400;
 static const int64_t NIST5Switch = 1441065600;
 static const int64_t TremontSwitch = 1443657600;
 static const int64_t WhirlpoolSwitch = 1448928000;
