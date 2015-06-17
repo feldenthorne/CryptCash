@@ -1126,27 +1126,27 @@ int64_t GetProofOfWorkReward(int64_t nHeight, int64_t nFees)
 {
     int64_t nSubsidy = 0 * COIN;
     
-	if(nHeight < QuarkSwitch)
+	if(nHeight < 10000)
 	{
 		nSubsidy = 8 * COIN; // Quark Algorithm
 	}
-	else if(nHeight < NIST5Switch)
+	else if(nHeight < 50000)
 	{
 		nSubsidy = 7.8 * COIN; // M7 Algorithm
 	}
-	else if(nHeight < TremontSwitch)
+	else if(nHeight < 100000)
 	{
 		nSubsidy = 6.6 * COIN; // Momentum Algorithm
 	}
-	else if(nHeight < WhirlpoolSwitch)
+	else if(nHeight < 250000)
 	{
 		nSubsidy = 5.4 * COIN; // Whirlpool Hash
 	}
-	else if(nHeight < X17Switch)
+	else if(nHeight < 500000)
 	{
 		nSubsidy = 4.52 * COIN; // Prime Algorithm
 	}
-	else if (nHeight < TeslaSwitch)
+	else if (nHeight < 1000000)
 	{
 		nSubsidy = 2 * COIN; // Tesla Algorithm
 	}
