@@ -435,7 +435,6 @@ SOURCES += \
     src/deps/skein.c \
     src/deps/haval.c \
     src/deps/keccak.c \
-    src/deps/md_helper.c \
     src/deps/ripemd.c \
     src/deps/sha2.c \
     src/deps/sha2big.c \
