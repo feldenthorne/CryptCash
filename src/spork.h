@@ -29,10 +29,10 @@ using namespace boost;
 
 
 // TODO
-#define SPORK_1_MASTERNODE_PAYMENTS_ENFORCEMENT_DEFAULT       1433910000
-#define SPORK_5_MAX_VALUE_DEFAULT                             1000  
+#define SPORK_1_MASTERNODE_PAYMENTS_ENFORCEMENT_DEFAULT       2428537599  //2015-4-8 23:59:59 GMT
+#define SPORK_5_MAX_VALUE_DEFAULT                             500        //500 XCYPT
 #define SPORK_8_REPLAY_BLOCKS_DEFAULT                         0
-#define SPORK_9_RECONVERGE_DEFAULT                            1890691200
+#define SPORK_9_RECONVERGE_DEFAULT                            1420070400  //2047-1-1
 
 class CSporkMessage;
 class CSporkManager;

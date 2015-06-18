@@ -90,14 +90,14 @@ public:
 
         convertSeed6(vFixedSeeds, pnSeed6_main, ARRAYLEN(pnSeed6_main));
 
-        nTargetSpacing = 40; // seconds
-        
-        nLastPOWBlock  = 1000000;
+        nTargetSpacing = 60; // seconds
+
+        nLastPOWBlock  = 10000;
 
         nFirstPoSBlock = 1000;
-        nCoinbaseMaturity = 25;
+        nCoinbaseMaturity = 175;
         nLaunchTime = txNew.nTime;
-        nStakeMinAge = 12 * 60 * 60;
+        nStakeMinAge = 2 * 60 * 60;
         nModifierInterval = 1 * 60;
 
         nMasternodeFixReward = 1000 * COIN;

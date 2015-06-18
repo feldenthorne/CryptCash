@@ -12,28 +12,8 @@
 #include "net.h"
 #include "script.h"
 #include "scrypt.h"
+#include "hashblock.h"
 
-/* The Crazy Ones:
- * 
- * 1) Quark 				( 1 - 10000 )
- * 2) Tremont				( 10000 - 50000)
- * 3) NIST5 	 			( 50000 - 100000 )
- * 4) Whirlpool				( 100000 - 250000 )
- * 5) X17				( 250000 - 500000 )
- * 
- * Final Destination:
- * 
- * 6) Tesla(REDIRECTED TO X11)	( 500000 - 100000 )
- */
- 
-#include "quark.h"
-#include "tremont.h"
-#include "nist5.h"
-#include "whirlpool_hash.h"
-#include "peoplescurrencyhash.h"
-#include "tesla.h"
-
-/* This Insanity Ends Here Boys! It Ends Here!*/
 
 #include <list>
 
@@ -64,7 +44,7 @@ static const int64_t DARKSEND_POOL_MAX = (17259.21*COIN);
 #define MASTERNODE_SYNC_IN_PROCESS             8
 #define MASTERNODE_REMOTELY_ENABLED            9
 
-#define MASTERNODE_MIN_CONFIRMATIONS           50
+#define MASTERNODE_MIN_CONFIRMATIONS           452
 #define MASTERNODE_MIN_DSEEP_SECONDS           (30*60)
 #define MASTERNODE_MIN_DSEE_SECONDS            (5*60)
 #define MASTERNODE_PING_SECONDS                (1*60)
@@ -102,19 +82,11 @@ static const int64_t MIN_TX_FEE = 0;
 /** Fees smaller than this (in satoshi) are considered zero fee (for relaying) */
 static const int64_t MIN_RELAY_TX_FEE = MIN_TX_FEE;
 /** No amount larger than this (in satoshi) is valid */
-static const int64_t MAX_MONEY = 10000000000 * COIN; // 1 Trillion Coins - Like a Boss!
+static const int64_t MAX_MONEY = 1000000000000 * COIN; // 1 Trillion Coins - Like a Boss!
 inline bool MoneyRange(int64_t nValue) { return (nValue >= 0 && nValue <= MAX_MONEY); }
 /** Threshold for nLockTime: below this value it is interpreted as block number, otherwise as UNIX timestamp. */
 static const unsigned int LOCKTIME_THRESHOLD = 500000000; // Tue Nov  5 00:53:20 1985 UTC
-/** These are Forking Variables that are responsible for the Algorithms to switch */
- 
-static const int64_t QuarkSwitch = 1435708800;
-static const int64_t NIST5Switch = 1441065600;
-static const int64_t TremontSwitch = 1443657600;
-static const int64_t WhirlpoolSwitch = 1448928000;
-static const int64_t X17Switch = 1451606400;
-static const int64_t TeslaSwitch = 1454284800;
- 
+
 inline int64_t FutureDrift(int64_t nTime) { return nTime + 120; }
 
 inline unsigned int GetTargetSpacing(int nHeight) { return 64; }
@@ -655,7 +627,7 @@ public:
     unsigned int nTime;
     unsigned int nBits;
     unsigned int nNonce;
-        
+
     // network and disk
     std::vector<CTransaction> vtx;
 
@@ -716,7 +688,6 @@ public:
         return (nBits == 0);
     }
 
-
     uint256 GetHash() const
     {
         if (nVersion > 6)
@@ -724,15 +695,10 @@ public:
         else
             return GetPoWHash();
     }
-
+    
     uint256 GetPoWHash() const
     {
-		if (nTime < QuarkSwitch)	{return QuarkHash(BEGIN(nVersion), END(nNonce));}
-		else if(nTime < NIST5Switch) {return NIST5Hash(BEGIN(nVersion), END(nNonce));}
-		else if(nTime < TremontSwitch) {return TremontHash(BEGIN(nVersion), END(nNonce));}
-		else if(nTime < WhirlpoolSwitch) {return Whirlpool(BEGIN(nVersion), END(nNonce));}
-		else if(nTime < X17Switch) {return PeoplesCurrencyHash(BEGIN(nVersion), END(nNonce));}
-		else {return TeslaHash(BEGIN(nVersion), END (nNonce));}
+        return HashSph(BEGIN(nVersion), END(nNonce));
     }
 
     int64_t GetBlockTime() const
