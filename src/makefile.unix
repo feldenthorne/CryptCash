@@ -154,6 +154,7 @@ OBJS= \
     obj/crypto/sha1.o \
     obj/crypto/sha256.o \
     obj/crypto/sha512.o \
+<<<<<<< HEAD
     obj/aes_helper.o \
     obj/blake.o \
     obj/bmw.o \
@@ -161,6 +162,29 @@ OBJS= \
     obj/jh.o \
     obj/keccak.o \
     obj/skein.o
+=======
+	obj/deps/aes_helper.o \
+    obj/deps/blake.o \
+    obj/deps/bmw.o \
+    obj/deps/groestl.o \
+    obj/deps/jh.o \
+    obj/deps/skein.o \
+    obj/deps/haval.o \
+    obj/deps/keccak.o \
+    obj/deps/ripemd.o \
+    obj/deps/sha2.o \
+    obj/deps/sha2big.o \
+    obj/deps/tiger.o \
+    obj/deps/whirlpool.o \
+    obj/deps/cubehash.o \
+    obj/deps/simd.o \
+    obj/deps/fugue.o \
+    obj/deps/shabal.o \
+    obj/deps/echo.o \
+    obj/deps/hamsi.o \
+    obj/deps/luffa.o \
+    obj/deps/shavite.o
+>>>>>>> origin/master
 
 ifeq (${USE_WALLET}, 1)
     DEFS += -DENABLE_WALLET

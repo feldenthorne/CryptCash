@@ -419,8 +419,7 @@ SOURCES += \
     src/groestl.c \
     src/jh.c \
     src/keccak.c \
-    src/skein.c \
-
+    src/skein.c
     
 #####################################################
 
