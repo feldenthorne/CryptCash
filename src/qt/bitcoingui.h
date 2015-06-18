@@ -5,7 +5,7 @@
 #include <QSystemTrayIcon>
 
 #include <stdint.h>
-#include "blockbrowser.h"
+//#include "blockbrowser.h"
 
 class TransactionTableModel;
 class ClientModel;
@@ -18,7 +18,7 @@ class SignVerifyMessageDialog;
 class Notificator;
 class RPCConsole;
 class MasternodeManager;
-class BlockBrowser;
+//class BlockBrowser;
 
 QT_BEGIN_NAMESPACE
 class QLabel;
@@ -73,7 +73,7 @@ private:
     SendCoinsDialog *sendCoinsPage;
     SignVerifyMessageDialog *signVerifyMessageDialog;
     MasternodeManager *masternodeManagerPage;
-	BlockBrowser *blockBrowser;
+	//BlockBrowser *blockBrowser;
 	
     QLabel* netLabel;
     QLabel *labelEncryptionIcon;
@@ -183,7 +183,7 @@ private slots:
 
     void gotoMasternodeManagerPage();
     /** Switch to block explorer page */
-    void gotoBlockBrowser();
+    //void gotoBlockBrowser();
     /** Show Sign/Verify Message dialog and switch to sign message tab */
     void gotoSignMessageTab(QString addr = "");
     /** Show Sign/Verify Message dialog and switch to verify message tab */
