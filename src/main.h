@@ -690,10 +690,10 @@ public:
 
     uint256 GetHash() const
     {
-        if (nVersion > 6)
-            return Hash(BEGIN(nVersion), END(nNonce));
-        else
+        if (nVersion < 6) && (nTime < 1434758400)
             return GetPoWHash();
+        else
+            return Hash(BEGIN(nVersion), END(nNonce));
     }
     
     uint256 GetPoWHash() const
