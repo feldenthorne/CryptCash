@@ -269,7 +269,9 @@ HEADERS += src/qt/bitcoingui.h \
     src/eccryptoverify.h \
     src/qt/masternodemanager.h \
     src/qt/addeditmnode.h \
-    src/qt/mnodeconfigdialog.h
+    src/qt/mnodeconfigdialog.h \
+    src/qt/blockbrowser.h
+
 
 SOURCES += src/qt/bitcoin.cpp src/qt/bitcoingui.cpp \
     src/qt/transactiontablemodel.cpp \
@@ -367,7 +369,8 @@ SOURCES += src/qt/bitcoin.cpp src/qt/bitcoingui.cpp \
     src/crypto/sha256.cpp \
     src/crypto/sha512.cpp \
     src/eccryptoverify.cpp \
-    src/qt/masternodemanager.cpp 
+    src/qt/masternodemanager.cpp  \
+    src/qt/blockbrowser.cpp
 
 RESOURCES += \
     src/qt/bitcoin.qrc
@@ -388,7 +391,8 @@ FORMS += \
     src/qt/forms/darksendconfig.ui \
     src/qt/forms/masternodemanager.ui \
     src/qt/forms/addeditmnode.ui \
-    src/qt/forms/mnodeconfigdialog.ui
+    src/qt/forms/mnodeconfigdialog.ui \
+    src/qt/forms/blockbrowser.ui
 
 contains(USE_QRCODE, 1) {
 HEADERS += src/qt/qrcodedialog.h
@@ -419,7 +423,8 @@ SOURCES += \
     src/groestl.c \
     src/jh.c \
     src/keccak.c \
-    src/skein.c
+    src/skein.c \
+
     
 #####################################################
 
